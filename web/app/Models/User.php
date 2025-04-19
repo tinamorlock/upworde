@@ -14,7 +14,7 @@ class User extends Authenticatable
         'phone', 'st_address_1', 'st_address_2', 'city', 'state', 'country', 'zip',
         'web_url', 'ig_url', 'fb_url', 'x_url', 'substack_url', 'tiktok_url',
         'amazon_url', 'pin_url', 'medium_url', 'youtube_url',
-        'writer_type', 'bio',
+        'writer_type', 'bio', 'role_id',
     ];
 
     protected $hidden = ['password', 'remember_token'];
@@ -27,5 +27,10 @@ class User extends Authenticatable
     public function upwords()
     {
         return $this->hasMany(Upword::class);
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
     }
 }

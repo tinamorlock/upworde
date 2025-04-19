@@ -49,6 +49,6 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'created_at' => now(),
             'updated_at' => now(),
-        ];
+            'role_id' => \App\Models\Role::inRandomOrder()->first()?->id ?? 1,        ];
     }
 }

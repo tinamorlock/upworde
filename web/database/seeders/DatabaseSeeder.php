@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(RoleSeeder::class);
+
         // Create 2 users with everything tied together
         User::factory(2)->create()->each(function ($user) {
             // Add a subscription
