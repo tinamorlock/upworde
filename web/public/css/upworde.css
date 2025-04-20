@@ -225,3 +225,7 @@ footer {
     border: 1px solid var(--contrast);
     color: var(--light);
 }
+
+.up-icon-padding {
+    padding-right: 15px;
+}

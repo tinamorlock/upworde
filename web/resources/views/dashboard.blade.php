@@ -29,8 +29,14 @@
                                                     <strong>{{ $upword->title }}</strong>
                                                 </a><br>
                                             </div>
+
                                             <div class="ms-2 d-flex gap-1">
-                                                <a href="{{ route('upwords.edit', $upword->id) }}" title="Edit" class="text-light-custom">
+                                                <!-- upload icon -->
+                                                <a href="#" title="Upload File" class="text-light-custom up-icon-padding">
+                                                    <i data-lucide="folder-plus" style="color: var(--light);"></i>
+                                                </a>
+                                                <!-- edit icon -->
+                                                <a href="{{ route('upwords.edit', $upword->id) }}" title="Edit" class="text-light-custom up-icon-padding">
                                                     <i data-lucide="pencil" style="color: var(--light);"></i>
                                                 </a>
 
@@ -146,9 +152,15 @@
                                             </a>
                                         </div>
                                         <div class="ms-2 d-flex gap-2">
-                                            <a href="{{ route('upwords.edit', $upword->id) }}" title="Edit">
+                                            <!-- upload icon -->
+                                            <a href="#" title="Upload File" class="text-light-custom up-icon-padding">
+                                                <i data-lucide="folder-plus" style="color: var(--light);"></i>
+                                            </a>
+                                            <!-- edit icon -->
+                                            <a href="{{ route('upwords.edit', $upword->id) }}" title="Edit" class="up-icon-padding">
                                                 <i data-lucide="pencil" style="color: var(--light);"></i>
                                             </a>
+                                            <!-- delete icon -->
                                             <form action="{{ route('upwords.destroy', $upword->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this project?')">
                                                 @csrf
                                                 @method('DELETE')

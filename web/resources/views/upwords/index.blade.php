@@ -14,11 +14,17 @@
                 @foreach ($upwords as $upword)
                     <li class="mb-3 d-flex justify-content-between align-items-start border-bottom pb-2">
                         <div>
-                            <strong class="text-light-custom">{{ $upword->title }}</strong><br>
-                            <small class="text-light-custom">Status: {{ $upword->status }}</small>
-                        </div>
+                            <div>
+                                <a href="{{ route('upwords.show', $upword->id) }}" class="text-light-custom">
+                                    <strong>{{ $upword->title }}</strong>
+                                </a>
+                            </div>                        </div>
                         <div class="ms-2 d-flex gap-2">
-                            <a href="{{ route('upwords.edit', $upword->id) }}" title="Edit">
+                            <!-- upload icon -->
+                            <a href="#" title="Upload File" class="text-light-custom up-icon-padding">
+                                <i data-lucide="folder-plus" style="color: var(--light);"></i>
+                            </a>
+                            <a href="{{ route('upwords.edit', $upword->id) }}" title="Edit" class="up-icon-padding"">
                                 <i data-lucide="pencil" style="color: var(--light);"></i>
                             </a>
                             <form action="{{ route('upwords.destroy', $upword->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this project?')">
