@@ -10,28 +10,54 @@
             <!-- Desktop Layout -->
             <div class="row d-none d-md-flex">
                 <!-- Column 1: Recent Upwords + New Project -->
+                <!-- Column 1: Recent Upwords + New Project -->
                 <div class="col-lg-3 mb-4 px-3">
                     <div class="text-center mb-3">
-                        <a href="#" class="btn btn-upworde btn-sm">+ New Project</a>
+                        <a href="{{ route('upwords.create') }}" class="btn btn-upworde btn-sm px-4">+ New Project</a>
                     </div>
-                    <h5 class="mb-3 text-center text-contrast">Recent Projects</h5>
-                    @if ($user->upwords && $user->upwords->count())
-                        <ul class="list-group">
-                            @foreach ($user->upwords->take(5) as $upword)
-                                <li class="list-group-item upworde-light-text">
-                                    <strong>{{ $upword->title }}</strong><br>
-                                    <small>Status: {{ $upword->status }}</small>
-                                </li>
-                            @endforeach
-                        </ul>
-                        @if ($user->upwords->count() > 5)
-                            <div class="mt-2">
-                                <a href="{{ route('upwords.index') }}" class="text-contrast small">View All Projects</a>
-                            </div>
-                        @endif
-                    @else
-                        <p class="upworde-light-text">You haven’t submitted any projects yet.</p>
-                    @endif
+
+                    <div class="card upworde-card">
+                        <div class="card-body">
+                            <h6 class="text-contrast text-center mb-3">Recent Projects</h6>
+
+                            @if ($user->upwords && $user->upwords->count())
+                                <ul class="list-unstyled mb-0">
+                                    @foreach ($user->upwords->take(5) as $upword)
+                                        <li class="mb-3 d-flex justify-content-between align-items-start">
+                                            <div>
+                                                <strong class="text-light-custom">{{ $upword->title }}</strong><br>
+                                                <small class="text-light-custom">Status: {{ $upword->status }}</small>
+                                            </div>
+                                            <div class="ms-2 d-flex gap-1">
+                                                <a href="#" title="Edit" class="text-light-custom">
+                                                    <i data-lucide="pencil" style="color: var(--light);"></i>
+                                                </a>
+
+                                                <!-- Delete Icon -->
+                                                <form action="#" method="POST" onsubmit="return confirm('Are you sure you want to delete this project?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="border-0 bg-transparent p-0 text-danger" title="Delete">
+                                                        <i data-lucide="trash-2"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </li>
+                                        <hr>
+
+                                    @endforeach
+                                </ul>
+
+                                @if ($user->upwords->count() > 5)
+                                    <div class="mt-3 text-center">
+                                        <a href="{{ route('upwords.index') }}" class="text-contrast small">View All Projects</a>
+                                    </div>
+                                @endif
+                            @else
+                                <p class="upworde-light-text">You haven’t submitted any projects yet.</p>
+                            @endif
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Column 2: Status Feed -->
@@ -98,6 +124,7 @@
             </div>
 
             <!-- Mobile Layout -->
+            <!-- Mobile Layout -->
             <div class="d-md-none">
                 <!-- Profile Edit Link -->
                 <div class="mb-4 text-center">
@@ -106,24 +133,44 @@
 
                 <!-- Upwords -->
                 <div class="mb-4">
-                    <h5 class="mb-3 text-contrast">Your Projects</h5>
-                    @if ($user->upwords && $user->upwords->count())
-                        <ul class="list-group">
-                            @foreach ($user->upwords->take(5) as $upword)
-                                <li class="list-group-item">
-                                    <strong class="text-light-custom">{{ $upword->title }}</strong><br>
-                                    <small class="text-light-custom">Status: {{ $upword->status }}</small>
-                                </li>
-                            @endforeach
-                        </ul>
-                        @if ($user->upwords->count() > 5)
-                            <div class="mt-2">
-                                <a href="{{ route('upwords.index') }}" class="text-contrast small">View All Projects</a>
-                            </div>
+                    <div>
+                        <h5 class="mb-3 text-contrast">Your Projects</h5>
+                        @if ($user->upwords && $user->upwords->count())
+                            <ul class="list-unstyled">
+                                @foreach ($user->upwords->take(5) as $upword)
+                                    <li class="mb-3 d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <strong class="text-light-custom">{{ $upword->title }}</strong><br>
+                                            <small class="text-light-custom">Status: {{ $upword->status }}</small>
+                                        </div>
+                                        <div class="ms-2 d-flex gap-2">
+                                            <a href="#" title="Edit">
+                                                <i data-lucide="pencil" style="color: var(--light);"></i>
+                                            </a>
+                                            <form action="#" method="POST" onsubmit="return confirm('Are you sure you want to delete this project?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="border-0 bg-transparent p-0">
+                                                    <i data-lucide="trash-2" style="color: var(--contrast);"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </li>
+                                    <hr>
+
+                                @endforeach
+
+                            </ul>
+                            @if ($user->upwords->count() > 5)
+                                <div class="mt-3 text-center">
+                                    <a href="{{ route('upwords.index') }}" class="text-contrast small">View All Projects</a>
+                                </div>
+                            @endif
+
+                        @else
+                            <p class="text-light-custom">You haven’t submitted any projects yet.</p>
                         @endif
-                    @else
-                        <p class="text-light-custom">You haven’t submitted any projects yet.</p>
-                    @endif
+                    </div>
                 </div>
 
                 <!-- Uploads -->

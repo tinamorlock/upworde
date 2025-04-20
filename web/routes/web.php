@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UpwordController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,5 +17,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/upwords/create', [UpwordController::class, 'create'])->name('upwords.create');
+    Route::post('/upwords', [UpwordController::class, 'store'])->name('upwords.store');
+});
+
+Route::get('/upwords', [UpwordController::class, 'index'])->name('upwords.index');
 
 require __DIR__.'/auth.php';

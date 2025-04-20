@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/upworde.css') }}">
     <link rel="icon" href="{{ asset('images/iconu.jpg') }}" />
+    <!-- Lucide Icon Library -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-light upworde-light-bg fixed-top border-bottom">
@@ -75,5 +77,8 @@
 </footer>
 
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script>
+    lucide.createIcons();
+</script>
 </body>
 </html>
