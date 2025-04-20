@@ -25,4 +25,13 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/upwords', [UpwordController::class, 'index'])->name('upwords.index');
 
+Route::delete('/upwords/{upword}', [UpwordController::class, 'destroy'])->name('upwords.destroy');
+
+Route::get('/upwords/{upword}/edit', [UpwordController::class, 'edit'])->name('upwords.edit');
+
+Route::get('/upwords/{upword}', [UpwordController::class, 'show'])->name('upwords.show');
+
+Route::put('/upwords/{upword}', [UpwordController::class, 'update'])->name('upwords.update');
+
+
 require __DIR__.'/auth.php';

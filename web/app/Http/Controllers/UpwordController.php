@@ -38,4 +38,52 @@ class UpwordController extends Controller
         $upwords = auth()->user()->upwords()->orderBy('created_at')->get();
         return view('upwords.index', compact('upwords'));
     }
+
+    public function destroy(\App\Models\Upword $upword)
+    {
+        // Optional: Make sure the authenticated user owns this upword
+        if ($upword->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $upword->delete();
+
+        return redirect()->back()->with('success', 'Project deleted.');
+    }
+
+    public function show(\App\Models\Upword $upword)
+    {
+        // Optional: Ensure the user owns the project
+        if ($upword->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        return view('upwords.show', compact('upword'));
+    }
+
+    public function edit(\App\Models\Upword $upword)
+    {
+        if ($upword->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        return view('upwords.edit', compact('upword'));
+    }
+
+    public function update(Request $request, \App\Models\Upword $upword)
+    {
+        if ($upword->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'status' => 'required|in:submitted,pending,editing,completed',
+        ]);
+
+        $upword->update($request->only(['title', 'description', 'status']));
+
+        return redirect()->route('upwords.show', $upword->id)->with('success', 'Project updated.');
+    }
 }

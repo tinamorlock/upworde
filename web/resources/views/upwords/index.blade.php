@@ -18,10 +18,10 @@
                             <small class="text-light-custom">Status: {{ $upword->status }}</small>
                         </div>
                         <div class="ms-2 d-flex gap-2">
-                            <a href="#" title="Edit">
+                            <a href="{{ route('upwords.edit', $upword->id) }}" title="Edit">
                                 <i data-lucide="pencil" style="color: var(--light);"></i>
                             </a>
-                            <form action="#" method="POST" onsubmit="return confirm('Are you sure you want to delete this project?')">
+                            <form action="{{ route('upwords.destroy', $upword->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this project?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="border-0 bg-transparent p-0">

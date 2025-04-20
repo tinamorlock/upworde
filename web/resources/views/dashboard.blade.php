@@ -25,16 +25,17 @@
                                     @foreach ($user->upwords->take(5) as $upword)
                                         <li class="mb-3 d-flex justify-content-between align-items-start">
                                             <div>
-                                                <strong class="text-light-custom">{{ $upword->title }}</strong><br>
-                                                <small class="text-light-custom">Status: {{ $upword->status }}</small>
+                                                <a href="{{ route('upwords.show', $upword->id) }}" class="text-light-custom">
+                                                    <strong>{{ $upword->title }}</strong>
+                                                </a><br>
                                             </div>
                                             <div class="ms-2 d-flex gap-1">
-                                                <a href="#" title="Edit" class="text-light-custom">
+                                                <a href="{{ route('upwords.edit', $upword->id) }}" title="Edit" class="text-light-custom">
                                                     <i data-lucide="pencil" style="color: var(--light);"></i>
                                                 </a>
 
                                                 <!-- Delete Icon -->
-                                                <form action="#" method="POST" onsubmit="return confirm('Are you sure you want to delete this project?')">
+                                                <form action="{{ route('upwords.destroy', $upword->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this project?')">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="border-0 bg-transparent p-0 text-danger" title="Delete">
@@ -140,14 +141,15 @@
                                 @foreach ($user->upwords->take(5) as $upword)
                                     <li class="mb-3 d-flex justify-content-between align-items-start">
                                         <div>
-                                            <strong class="text-light-custom">{{ $upword->title }}</strong><br>
-                                            <small class="text-light-custom">Status: {{ $upword->status }}</small>
+                                            <a href="{{ route('upwords.show', $upword->id) }}" class="text-light-custom">
+                                                <strong>{{ $upword->title }}</strong>
+                                            </a>
                                         </div>
                                         <div class="ms-2 d-flex gap-2">
-                                            <a href="#" title="Edit">
+                                            <a href="{{ route('upwords.edit', $upword->id) }}" title="Edit">
                                                 <i data-lucide="pencil" style="color: var(--light);"></i>
                                             </a>
-                                            <form action="#" method="POST" onsubmit="return confirm('Are you sure you want to delete this project?')">
+                                            <form action="{{ route('upwords.destroy', $upword->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this project?')">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="border-0 bg-transparent p-0">
